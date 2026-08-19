@@ -1,0 +1,13 @@
+{
+  "name": "difa-defence-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Difa Defence tanıtım sitesi ve içerik yönetim paneli — statik dosyalar, derleme adımı yok.",
+  "scripts": {
+    "dev": "live-server --port=8000 --no-browser",
+    "serve": "python3 -m http.server 8000"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}

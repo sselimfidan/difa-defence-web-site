@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Difa Defence — Content Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+
+  <div class="topbar">
+    <svg class="mark" viewBox="0 0 48 48" aria-hidden="true">
+      <path class="a" d="M6 8 L20 8 L34 24 L20 40 L6 40 L20 24 Z"></path>
+      <path class="b" d="M20 8 L34 8 L48 24 L34 40 L20 40 L34 24 Z"></path>
+    </svg>
+    <div class="topbar__title">Content Admin<small>Difa Defence website</small></div>
+    <div class="topbar__spacer"></div>
+    <span class="status" id="save-status">Ready</span>
+    <button class="btn btn--ghost" id="btn-import">Import</button>
+    <button class="btn btn--ghost" id="btn-export">Export JSON</button>
+    <button class="btn btn--danger" id="btn-reset">Reset</button>
+    <button class="btn btn--primary" id="btn-save">Save changes</button>
+    <input type="file" id="import-file" accept="application/json" style="display:none">
+  </div>
+
+  <div class="layout">
+    <section class="editor" id="editor" aria-label="Content editor"></section>
+
+    <section class="preview">
+      <div class="preview__bar">
+        <span class="preview__dot"></span>
+        <span>Live preview — index.html</span>
+        <div class="preview__device">
+          <button data-w="full" class="is-active">Desktop</button>
+          <button data-w="820">Tablet</button>
+          <button data-w="390">Phone</button>
+        </div>
+      </div>
+      <iframe class="preview__frame" id="preview-frame" src="index.html" title="Live site preview"></iframe>
+    </section>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="assets/js/content.js"></script>
+  <script src="assets/js/store.js"></script>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>
