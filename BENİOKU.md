@@ -1,66 +1,70 @@
 # Difa Defence — Web Sitesi + Yönetim Paneli
 
-PDF'deki tasarımdan yapılmış, tek sayfalık tanıtım sitesi ve içeriği
-düzenlemek için bir yönetim paneli. Sunucu gerektirmez; tüm dosyalar
-statiktir ve herhangi bir hosting'e (ya da doğrudan tarayıcıda) çalışır.
+PDF tasarımından yapılmış tek sayfalık tanıtım sitesi ve içeriği düzenlemek
+için bir yönetim paneli. Derleme (build) gerektirmez; saf HTML/CSS/JS.
+
+## YENİ: Çok dil + interaktif harita
+- **3 dil: Türkçe, Arapça, İngilizce.** Site, ziyaretçinin tarayıcı diline
+  göre otomatik açılır. Üstteki dil menüsünden (globe simgesi) elle de
+  değiştirilebilir. Arapça'da düzen otomatik sağdan-sola (RTL) döner.
+- **İnteraktif harita (OpenStreetMap, API anahtarı gerektirmez).** Panelden
+  adres yazıp "Haritada bul" ile konumu otomatik bulabilir ya da enlem/boylam
+  ve zoom değerlerini elle girebilirsiniz. İnternet yoksa otomatik olarak
+  yedek harita görseline döner.
 
 ## Dosyalar
-
-    index.html            → Herkese açık web sitesi
-    admin.html            → Yönetim paneli (içerik düzenleme)
+    index.html            → Web sitesi
+    admin.html            → Yönetim paneli
     assets/
-      css/style.css       → Sitenin tasarımı
-      css/admin.css       → Panelin tasarımı
-      js/content.js       → Varsayılan içerik (metinler, görsel yolları)
-      js/store.js         → Ortak yardımcılar
-      js/site.js          → Siteyi içerikten oluşturur
+      css/style.css       → Site tasarımı (+ RTL, dil menüsü, harita)
+      css/admin.css       → Panel tasarımı
+      js/content.js       → Varsayılan içerik (3 dil + harita verisi)
+      js/store.js         → Ortak yardımcılar + dil yönetimi
+      js/site.js          → Siteyi içerikten üretir (i18n, harita)
       js/admin.js         → Panel mantığı
-      img/                → PDF'den çıkarılmış optimize görseller
+      img/                → PDF'den optimize görseller
       data/content.json   → İçeriğin dışa aktarılabilir kopyası
 
-## Siteyi açma
+## Çalıştırma
+`file://` ile AÇMAYIN — panel ile önizlemenin aynı origin'i paylaşması ve
+harita/font kaynaklarının yüklenmesi için basit bir yerel sunucu kullanın.
+`index.html`'in bulunduğu klasörde:
 
-`index.html` dosyasına çift tıklayın ya da bir web sunucusuna yükleyin.
+    python3 -m http.server 8000
 
-> İpucu: En sorunsuz deneyim için basit bir yerel sunucu kullanabilirsiniz:
-> klasörde `python3 -m http.server` çalıştırıp `http://localhost:8000`
-> adresine gidin.
+Sonra:
+- Site:  http://localhost:8000/
+- Panel: http://localhost:8000/admin.html
 
-## İçeriği düzenleme (yönetim paneli)
+## Panelde düzenleme
+1. `admin.html`'i açın.
+2. En üstteki **Düzenlenen dil** çubuğundan dili seçin (Türkçe/Arapça/İngilizce).
+   Her metin kutusunun yanındaki küçük **EN/TR/AR** rozeti, o an hangi dili
+   düzenlediğinizi gösterir. Görseller, telefon, e-posta, koordinatlar tüm
+   dillerde ortaktır.
+3. Değişiklikler sağdaki **canlı önizlemede** anında görünür.
+4. **Save changes** ile bu tarayıcıya kaydedin.
 
-1. `admin.html` dosyasını açın.
-2. Soldaki panellerden bölümleri açıp metinleri, bağlantıları ve
-   görselleri düzenleyin. Sağdaki **canlı önizleme** anında güncellenir.
-3. Görsel değiştirmek için **Upload** ile bilgisayarınızdan resim seçin
-   ya da kutuya bir yol/URL yazın.
-4. **Save changes** (Kaydet) ile değişiklikleri bu tarayıcıya kaydedin.
-
-Panelde neler düzenlenebilir: marka adı ve slogan, menü bağlantıları,
-ana görsel (hero) başlığı/metni/görseli, Hakkımızda paragrafları ve
-görselleri, Faaliyetler metni ve görselleri, Ürün kartları, İletişim
-bilgileri ve harita, alt bilgi (footer).
+### Harita
+İletişim & Harita panelinde:
+- **Adresten bul:** yer adı yazın → "Haritada bul" → enlem/boylam otomatik dolar.
+- **Elle:** Enlem (lat), Boylam (lng), Zoom (1–19) girin.
+- **Pin etiketi:** haritadaki işaretçinin üstünde çıkan metin (dile göre).
 
 ## Değişiklikleri kalıcı yayınlama
-
-Panel, düzenlemeleri tarayıcının hafızasına (localStorage) kaydeder — bu
-sizin cihazınızda anında görünür. Değişiklikleri **siteye kalıcı olarak**
-taşımak için:
-
-1. Panelde **Export JSON**'a tıklayın; `content.json` inecek.
+Panel düzenlemeleri tarayıcı hafızasına yazar (sizin cihazınızda görünür).
+Herkese yayınlamak için:
+1. Panelde **Export JSON** → `content.json` iner.
 2. Bu dosyanın içeriğini `assets/js/content.js` içindeki
-   `window.DIFA_DEFAULT_CONTENT = { ... }` nesnesiyle değiştirin
-   (ya da geliştiricinize verin).
-3. Güncellenmiş dosyaları hosting'e yükleyin. Böylece herkes güncel
-   içeriği görür.
+   `window.DIFA_DEFAULT_CONTENT = { ... }` ile değiştirin.
+3. Dosyaları hosting'e yükleyin.
 
-- **Import**: Daha önce dışa aktardığınız bir `content.json`'ı geri
-  yükler.
-- **Reset**: Tüm düzenlemeleri silip orijinal (PDF) içeriğe döner.
+- **Import**: dışa aktardığınız `content.json`'ı geri yükler.
+- **Reset**: her şeyi orijinal içeriğe döndürür.
 
 ## Notlar
-
-- Yazı tipi Poppins Google Fonts'tan yüklenir; internet yoksa sistem
-  yazı tipiyle sorunsuz gösterilir.
-- Görseller PDF'den alınıp web için optimize edilmiştir (~1 MB toplam).
-- Site mobil, tablet ve masaüstünde uyumludur; klavye erişimi ve
-  "reduced motion" tercihi desteklenir.
+- Yazı tipleri Google Fonts'tan gelir (Latin için Poppins, Arapça için Cairo);
+  internet yoksa sistem yazı tipiyle sorunsuz gösterilir.
+- Harita OpenStreetMap + Leaflet ile çalışır; ikisi de ücretsiz ve anahtarsızdır.
+- Site mobil/tablet/masaüstü uyumludur; klavye erişimi ve "reduced motion"
+  desteklenir.

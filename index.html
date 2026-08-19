@@ -7,7 +7,9 @@
   <meta name="description" content="Difa Defence — unmanned systems, electronic warfare, armament and integrated defence solutions delivered worldwide.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Leaflet (interactive map, no API key) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -21,16 +23,12 @@
   </header>
 
   <main>
-    <!-- Hero -->
     <section class="hero" id="home">
       <div class="hero__media" id="hero-media"></div>
-      <div class="shell">
-        <div class="hero__inner" id="hero-inner"></div>
-      </div>
-      <div class="scroll-cue">Scroll <span></span></div>
+      <div class="shell"><div class="hero__inner" id="hero-inner"></div></div>
+      <div class="scroll-cue"><span id="scroll-cue">Scroll</span><i></i></div>
     </section>
 
-    <!-- About -->
     <section class="section" id="about">
       <div class="shell about__grid">
         <div class="about__copy reveal" id="about-copy"></div>
@@ -38,7 +36,6 @@
       </div>
     </section>
 
-    <!-- Activities -->
     <section class="section section--tint" id="activities">
       <div class="shell act__grid">
         <div class="act__media reveal" id="act-media"></div>
@@ -46,7 +43,6 @@
       </div>
     </section>
 
-    <!-- Products -->
     <section class="section" id="products">
       <div class="shell">
         <div class="products__head reveal" id="products-head"></div>
@@ -54,12 +50,9 @@
       </div>
     </section>
 
-    <!-- Contact -->
     <section class="contact" id="contact">
       <div class="shell">
-        <div class="contact__grid">
-          <div class="reveal" id="contact-copy"></div>
-        </div>
+        <div class="contact__grid"><div class="reveal" id="contact-copy"></div></div>
         <div class="reveal" id="contact-map"></div>
       </div>
     </section>
@@ -69,6 +62,8 @@
     <div class="shell" id="footer"></div>
   </footer>
 
+  <!-- Leaflet JS (before our scripts) -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="assets/js/content.js"></script>
   <script src="assets/js/store.js"></script>
   <script src="assets/js/site.js"></script>

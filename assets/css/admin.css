@@ -208,3 +208,32 @@ button, input, textarea { font-family: inherit; }
   .preview { height: 70vh; border-top: 1px solid var(--line); }
 }
 :focus-visible { outline: 3px solid var(--blue-2); outline-offset: 2px; }
+
+/* ---- editing-language bar ---- */
+.langbar {
+  position: sticky; top: 0; z-index: 5;
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  background: #fff; border: 1px solid var(--line);
+  border-radius: 12px; padding: 10px 14px; margin-bottom: 14px;
+}
+.langbar__label { font-size: .78rem; font-weight: 700; color: var(--ink); }
+.langbar__group { display: flex; gap: 6px; margin-left: auto; }
+.langbar__group button {
+  border: 1px solid var(--line); background: #f4f6f8; color: var(--body);
+  padding: 7px 14px; border-radius: 999px; cursor: pointer; font-size: .82rem; font-weight: 600;
+}
+.langbar__group button.is-active { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+.lang-tag {
+  display: inline-block; font-size: .62rem; font-weight: 700; letter-spacing: .5px;
+  color: var(--blue); background: #eaf1fb; border-radius: 5px;
+  padding: 1px 6px; margin-left: 6px; vertical-align: middle;
+}
+
+/* ---- map editor ---- */
+.mapedit { margin: 10px 0 6px; }
+.mapedit__title { font-size: .82rem; font-weight: 700; color: var(--ink); }
+.imgfield__row input[type=text] {
+  flex: 1; border: 1px solid var(--line); border-radius: 10px;
+  padding: 10px 12px; font-size: .9rem; background: #fbfcfd;
+}
